@@ -115,13 +115,7 @@ class RPR_Public {
 		wp_enqueue_script( 'recipepress-reloaded', plugin_dir_url( __FILE__ ) . 'js/rpr-public.js', array( 'jquery' ), $this->version, true );
 	}
 
-	// Add Widgets
-
-	/**
-	 *
-	 * @todo Documentation
-	 *
-	 */
+	// Add Widgets.
 	public function register_widgets() {
 		if ( AdminPageFramework::getOption( 'rpr_options', array( 'general', 'use_taxcloud_widget' ), true ) ) {
 			require_once( dirname( __FILE__ ) . '/..' . '/widgets/class-rpr-widget-tag-cloud.php' );
@@ -135,11 +129,11 @@ class RPR_Public {
 	}
 
 	/**
-	 * Manipulate the wordpress query to include recipes to homepage if set in options.
+	 * Manipulate the WordPress query to include recipes to homepage if set in options.
 	 *
 	 * @since 0.8.0
 	 *
-	 * @param type $query Wordpress Querxy object.
+	 * @param object $query The WP query object.
 	 */
 	public function query_recipes( $query ) {
 		// Don't change query on admin page.
@@ -178,9 +172,9 @@ class RPR_Public {
 	 *
 	 * @since 0.8.0
 	 *
-	 * @param type $query
+	 * @param type $query The WP query object.
 	 *
-	 * @return type none
+	 * @return void
 	 */
 	private function add_recipe_to_query( $query ) {
 		// add post type to query.
@@ -202,7 +196,7 @@ class RPR_Public {
 	 *
 	 * @since 0.8.0
 	 *
-	 * @param object $query
+	 * @param object $query The WP query object.
 	 *
 	 * @return object $query
 	 */
@@ -220,7 +214,7 @@ class RPR_Public {
 	/**
 	 * Get the rendered excerpt of a recipe and forward it to the theme as the_excerpt()
 	 * Same work is done by get_recipe_content, however some theme specifically include $post->excerpt,
-	 * then content is renderd by this function
+	 * then content is rendered by this function
 	 *
 	 * @since 0.8.0
 	 *
@@ -261,29 +255,29 @@ class RPR_Public {
 		}
 
 		/* Only render specifically if we have a recipe */
-		if ( get_post_type() == 'rpr_recipe' ) {
-			// Remove the filter
+		if ( get_post_type() === 'rpr_recipe' ) {
+			// Remove the filter.
 			remove_filter( 'the_content', array( $this, 'get_recipe_content' ) );
 
-			// Do the stuff
+			// Do the stuff.
 			$recipe_post          = get_post();
 			$recipe               = get_post_custom( $recipe_post->ID );
 			$GLOBALS['recipe_id'] = $recipe_post->ID;
 
 			if ( is_single() || AdminPageFramework::getOption( 'rpr_options', array(
-					'general',
-					'archive_display',
-				), true ) === 'full' ) {
+				'general',
+				'archive_display',
+			), true ) === 'full' ) {
 				$content = $this->render_recipe_content( $recipe_post );
 			} else {
 
 				$content = $this->render_recipe_excerpt( $recipe_post );
 			}
 
-			// Add the filter again
+			// Add the filter again.
 			add_filter( 'the_content', array( $this, 'get_recipe_content' ), 10 );
 
-			// return the rendered content
+			// return the rendered content.
 			return $content;
 		} else {
 			return $content;
@@ -295,42 +289,42 @@ class RPR_Public {
 	 *
 	 * @since 0.8.0
 	 *
-	 * @param object $recipe_post
+	 * @param object $recipe_post The recipe post object.
 	 *
 	 * @return string $content
 	 */
 	private function render_recipe_excerpt( $recipe_post ) {
 
-		// Return if we are on a single post page:
+		// Return if we are on a single post page.
 		if ( is_single() ) {
 			return;
 		}
-		// Get the layot's includepath
+		// Get the layout's includepath.
 		$includepath = $this->get_the_layout() . 'excerpt.php';
 
-		// Check if the layout file really exists
+		// Check if the layout file really exists.
 		if ( ! file_exists( $includepath ) ) {
-			// If the layout does not provide an excerpt file, use the default one:
+			// If the layout does not provide an excerpt file, use the default one.
 			$includepath = plugin_dir_path( __FILE__ ) . 'layouts/rpr_default/excerpt.php';
 		}
 
-		// Get the recipe data:
+		// Get the recipe data.
 		$recipe = get_post_custom( $recipe_post->ID );
-		//$content = $this->get_recipes_content($recipe_post);
+		//$content = $this->get_recipes_content($recipe_post).
 
-		// Start rendering
+		// Start rendering.
 		ob_start();
 
-		include_once( dirname( __FILE__ ) . '/rpr_template_tags.php' );
+		include_once dirname( __FILE__ ) . '/rpr_template_tags.php';
 		// Include the excerpt file:
-		include( $includepath );
-		// and render the content using that file:
+		include $includepath;
+		// and render the content using that file.
 		$content = ob_get_contents();
 
-		// Finish rendering
+		// Finish rendering.
 		ob_end_clean();
 
-		// return the rendered content:
+		// return the rendered content.
 		return $content;
 
 	}
@@ -345,7 +339,7 @@ class RPR_Public {
 	 * @return string $content
 	 */
 	private function render_recipe_content( $recipe_post ) {
-		// Get the layout's includepath
+		// Get the layout's includepath.
 		$includepath = $this->get_the_layout() . 'recipe.php';
 
 		if ( ! file_exists( $includepath ) ) {
@@ -354,9 +348,9 @@ class RPR_Public {
 			$includepath = plugin_dir_path( __FILE__ ) . 'layouts/rpr_default/recipe.php';
 		}
 
-		// Get the recipe data:
+		// Get the recipe data.
 		$recipe = get_post_custom( $recipe_post->ID );
-		//$content = $this->get_recipes_content($recipe_post);
+		//$content = $this->get_recipes_content($recipe_post).
 
 		// Start rendering
 		ob_start();
@@ -466,21 +460,75 @@ class RPR_Public {
 			'order'          => 'ASC',
 			'posts_per_page' => - 1,
 		);
-		$query = new WP_Query( $args );
-		$posts = array();
-
-		if ( $query->have_posts() ) {
-			while ( $query->have_posts() ) {
-				$query->the_post();
-				global $post;
-				$posts[] = $post;
-			}
-			wp_reset_postdata();
-		}
+		$posts = get_posts( $args );
 
 		// Include the taxonomy file:
 		include_once( dirname( __FILE__ ) . '/rpr_template_tags.php' );
 		include( $includepath );
+		// and render the content using that file:
+		$content = ob_get_contents();
+
+		// Finish rendering
+		ob_end_clean();
+
+		// return the rendered content:
+		return $content;
+	}
+
+	/**
+	 * Render a recipe index in a grid by recipe course.
+	 *
+	 * @since 0.9.4
+	 *
+	 * @param string $taxonomy
+	 * @param int $recipe_count
+	 *
+	 * @return string $content
+	 */
+	private function render_recipe_grid( $taxonomy, $recipe_count ) {
+
+		$grid_posts = array();
+
+		// Get the layout's includepath
+		$includepath = $this->get_the_layout() . 'recipe_grid.php';
+
+		if ( ! file_exists( $includepath ) ) {
+			// If the layout does not provide an taxonomy file, use the default one:
+			$includepath = plugin_dir_path( __FILE__ ) . 'layouts/rpr_default/recipe_grid.php';
+		}
+
+		/**
+		 * Set recipe_post to false for template tags
+		 */
+		$recipe_post = false;
+
+		$terms = get_terms( array(
+			'taxonomy' => $taxonomy,
+		) );
+
+		if ( ! is_wp_error( $terms ) ) {
+			foreach ( $terms as $term ) {
+				$args  = array(
+					'post_type'      => 'rpr_recipe',
+					'post_status'    => 'publish',
+					'orderby'        => 'post_title',
+					'order'          => 'ASC',
+					'posts_per_page' => $recipe_count,
+					'tax_query' => array(
+						array(
+							'taxonomy' => $taxonomy,
+							'field'    => 'slug',
+							'terms'    => $term->slug,
+						),
+					),
+				);
+				$grid_posts[ $term->slug ] = get_posts( $args );
+			}
+		}
+
+		// Include the taxonomy file:
+		include_once dirname( __FILE__ ) . '/rpr_template_tags.php';
+		include $includepath;
 		// and render the content using that file:
 		$content = ob_get_contents();
 
@@ -588,10 +636,12 @@ class RPR_Public {
 	 * @since 0.8.0
 	 *
 	 * @param mixed $options
+	 *
+	 * @return string
 	 */
 	public function do_taxlist_shortcode( $options ) {
 		/**
-		 * Set default values for options not set explicityly
+		 * Set default values for options not set explicitly
 		 */
 		$options = shortcode_atts( array(
 			'headers' => 'false',
@@ -610,10 +660,12 @@ class RPR_Public {
 	 * @since 0.8.0
 	 *
 	 * @param mixed $options
+	 *
+	 * @return string
 	 */
 	public function do_recipe_index_shortcode( $options ) {
 		/**
-		 * Set default values for options not set explicityly
+		 * Set default values for options not set explicitly
 		 */
 		$options = shortcode_atts( array(
 			'headers' => 'false',
@@ -621,6 +673,30 @@ class RPR_Public {
 
 		// The actual rendering is done by a special function
 		$output = $this->render_recipe_index( $options['headers'] );
+
+		return do_shortcode( $output );
+	}
+
+	/**
+	 * Do the shortcode 'rpr-index-grid' and render a list of all recipes
+	 *
+	 * @since 0.8.0
+	 *
+	 * @param mixed $options
+	 *
+	 * @return string
+	 */
+	public function do_recipe_grid_shortcode( $options ) {
+		/**
+		 * Set default values for options not set explicitly
+		 */
+		$options = shortcode_atts( array(
+			'taxonomy'     => 'course',
+			'recipe_count' => 9,
+		), $options );
+
+		// The actual rendering is done by a special function
+		$output = $this->render_recipe_grid( $options['taxonomy'], $options['recipe_count'] );
 
 		return do_shortcode( $output );
 	}

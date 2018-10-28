@@ -175,6 +175,43 @@ ul.rpr_taxlist {
 	margin: 0;
 }
 
+/* grid index page */
+.rpr_tax_items_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+.rpr_tax_container h2 {
+    border-bottom: 2px solid;
+}
+
+.rpr_tax_item {
+    width: 200px;
+    margin: 0 10px 10px 0;
+}
+
+.rpr_tax_item_img {
+    height: 200px;
+    overflow: hidden;
+}
+
+.rpr_tax_link_button {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 1em 0 3em 0;
+}
+
+.rpr_tax_link_button p {
+    background-color: #3e3e3e;
+    display: inline-block;
+    padding: .5em 1em;
+    color: #fff;
+    line-height: 1;
+    margin: 0;
+}
+
 /* print link */
 .entry-content .print-link a {
     text-decoration:none;
