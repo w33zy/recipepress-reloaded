@@ -9,7 +9,8 @@
  */
 
 // Create an empty output variable.
-$out = '';
+$out   = '';
+$image = '';
 
 if ( $grid_posts && count( $grid_posts ) > 0 ) {
 

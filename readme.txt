@@ -1,8 +1,8 @@
 === RecipePress reloaded===
-Contributors: Jan Köster
+Contributors: Jan Köster, w33zy
 Tags: recipe, recipes, cooking, baking, food, food blog, recipe sharing, 
 Requires at least: 4.0
-Tested up to: 4.8
+Tested up to: 4.9.8
 Stable tag: 0.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -69,6 +69,12 @@ Please help [translating](https://translate.wordpress.org/projects/wp-plugins/re
 3. Configure the plugin on the Recipes menu screen.
 
 == Changelog ==
+
+= 0.10.0 =
+  * Added a new picture grid based recipe index page via shortcode
+  * Cleaned up a couple files as per WPCS rules... this is an ongoing process
+  * Fixed various PHP warning and errors
+  * Removed the usage of non-breaking spaces, fixed extra spaces before commas in ingredient line
 
 = 0.9.2 =
   * Fixing a bug while saving recipes

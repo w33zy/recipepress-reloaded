@@ -463,8 +463,8 @@ class RPR_Public {
 		$posts = get_posts( $args );
 
 		// Include the taxonomy file:
-		include_once( dirname( __FILE__ ) . '/rpr_template_tags.php' );
-		include( $includepath );
+		include_once dirname( __FILE__ ) . '/rpr_template_tags.php';
+		include $includepath;
 		// and render the content using that file:
 		$content = ob_get_contents();
 
@@ -482,12 +482,14 @@ class RPR_Public {
 	 *
 	 * @param string $taxonomy
 	 * @param int $recipe_count
+	 * @param string $orderby
 	 *
 	 * @return string $content
 	 */
-	private function render_recipe_grid( $taxonomy, $recipe_count ) {
+	private function render_recipe_grid( $taxonomy, $recipe_count, $orderby ) {
 
 		$grid_posts = array();
+		$no_duplicates = array();
 
 		// Get the layout's includepath
 		$includepath = $this->get_the_layout() . 'recipe_grid.php';
@@ -497,9 +499,7 @@ class RPR_Public {
 			$includepath = plugin_dir_path( __FILE__ ) . 'layouts/rpr_default/recipe_grid.php';
 		}
 
-		/**
-		 * Set recipe_post to false for template tags
-		 */
+		// Set recipe_post to false for template tags
 		$recipe_post = false;
 
 		$terms = get_terms( array(
@@ -511,9 +511,10 @@ class RPR_Public {
 				$args  = array(
 					'post_type'      => 'rpr_recipe',
 					'post_status'    => 'publish',
-					'orderby'        => 'post_title',
+					'orderby'        => $orderby,
 					'order'          => 'ASC',
 					'posts_per_page' => $recipe_count,
+					'post__not_in'    => $no_duplicates,
 					'tax_query' => array(
 						array(
 							'taxonomy' => $taxonomy,
@@ -522,6 +523,14 @@ class RPR_Public {
 						),
 					),
 				);
+
+				// This doubles the query time so I am disabling by default.
+				if ( apply_filters( 'rpr_recipe_grid_no_duplicates', false ) ) {
+					foreach ( get_posts( $args ) as $_post ) {
+						$no_duplicates[] = $_post->ID;
+					}
+				}
+
 				$grid_posts[ $term->slug ] = get_posts( $args );
 			}
 		}
@@ -573,7 +582,7 @@ class RPR_Public {
 	 */
 	public function do_recipe_shortcode( $options ) {
 		/**
-		 * Set default values for options not set explicityly
+		 * Set default values for options not set explicitly
 		 */
 		$options = shortcode_atts( array(
 			'id'      => 'n/a',
@@ -693,10 +702,11 @@ class RPR_Public {
 		$options = shortcode_atts( array(
 			'taxonomy'     => 'course',
 			'recipe_count' => 9,
+			'orderby'      => 'date',
 		), $options );
 
 		// The actual rendering is done by a special function
-		$output = $this->render_recipe_grid( $options['taxonomy'], $options['recipe_count'] );
+		$output = $this->render_recipe_grid( $options['taxonomy'], $options['recipe_count'], $options['orderby'] );
 
 		return do_shortcode( $output );
 	}
