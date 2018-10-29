@@ -512,7 +512,7 @@ class RPR_Public {
 					'post_type'      => 'rpr_recipe',
 					'post_status'    => 'publish',
 					'orderby'        => $orderby,
-					'order'          => 'ASC',
+					'order'          => 'DESC',
 					'posts_per_page' => $recipe_count,
 					'post__not_in'    => $no_duplicates,
 					'tax_query' => array(

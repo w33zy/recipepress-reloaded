@@ -141,7 +141,6 @@ class RPR {
 		 *
 		 * @link http://www.admin-page-framework.michaeluno.jp/
 		 * @since 0.8.0
-		 *
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'libraries/apf/admin-page-framework.php';
 
@@ -180,23 +179,23 @@ class RPR {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-		// Migration from older versions
+		// Migration from older versions.
 		$this->loader->add_action( 'admin_init', $plugin_admin->migration, 'fix_dbversion' );
 		$this->loader->add_action( 'admin_init', $plugin_admin->migration, 'check_migration' );
 		$this->loader->add_action( 'admin_init', $plugin_admin->migration, 'rpr_do_migration' );
 		$this->loader->add_action( 'admin_notices', $plugin_admin->migration, 'notice_migration' );
 
-		// Install demo data / sample recipes
+		// Install demo data / sample recipes.
 		$this->loader->add_action( 'admin_init', $plugin_admin->demo, 'do_install_base_options' );
 		$this->loader->add_action( 'admin_init', $plugin_admin->demo, 'rpr_do_install_samples' );
 		$this->loader->add_action( 'admin_notices', $plugin_admin->demo, 'notice_demo' );
 
 
-		// Options page
+		// Options page.
 		$this->loader->add_action( 'init', $plugin_admin, 'create_options' );
-		// Meta boxes:
+		// Meta boxes.
 		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->generalmeta, 'metabox_postimage' );
-		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->generalmeta, 'metabox_description' );
+		//$this->loader->add_action( 'do_meta_boxes', $plugin_admin->generalmeta, 'metabox_description' );
 		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->generalmeta, 'metabox_details' );
 
 
@@ -212,31 +211,30 @@ class RPR {
 		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->instructions, 'metabox_instructions' );
 		$this->loader->add_action( 'do_meta_boxes', $plugin_admin->generalmeta, 'metabox_notes' );
 
-		// Save recipe
+		// Save recipe.
 		$this->loader->add_action( 'save_post', $plugin_admin, 'save_recipe', 10, 2 );
 
-		// Display error messages
+		// Display error messages.
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'admin_notice_handler' );
 
-		// Shortcodes to embed recipes into post types
-		// Shortcode for recipe
+		// Shortcodes to embed recipes into post types.
 		$this->loader->add_action( 'media_buttons', $plugin_admin->shortcodes, 'add_button_scr' );
 		$this->loader->add_action( 'in_admin_footer', $plugin_admin->shortcodes, 'load_in_admin_footer_scr' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin->shortcodes, 'load_ajax_scripts_scr' );
 		$this->loader->add_action( 'wp_ajax_rpr_get_results', $plugin_admin->shortcodes, 'process_ajax_scr' );
 
-		// Shortcode for listings
+		// Shortcode for listings.
 		$this->loader->add_action( 'media_buttons', $plugin_admin->shortcodes, 'add_button_scl' );
 		$this->loader->add_action( 'in_admin_footer', $plugin_admin->shortcodes, 'load_in_admin_footer_scl' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin->shortcodes, 'load_ajax_scripts_scl' );
 
-		// Add recipes to Recent Activity widget
+		// Add recipes to Recent Activity widget.
 		$this->loader->add_filter( 'dashboard_recent_posts_query_args', $plugin_admin, 'add_to_dashboard_recent_posts_widget' );
 
-		// Add recipes to 'At a Glance' widget
+		// Add recipes to 'At a Glance' widget.
 		$this->loader->add_filter( 'dashboard_glance_items', $plugin_admin, 'add_recipes_glance_items' );
 
-		// Add messages on the recipe editor screen
+		// Add messages on the recipe editor screen.
 		$this->loader->add_filter( 'post_updated_messages', $plugin_admin, 'updated_rpr_messages' );
 	}
 

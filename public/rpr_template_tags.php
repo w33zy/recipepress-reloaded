@@ -35,7 +35,7 @@ if ( ! function_exists( 'get_the_rpr_taxonomy_headline' ) ) {
 	 * @since 0.8.0
 	 *
 	 * @param string $taxonomy
-	 * @param string $icons
+	 * @param bool $icons
 	 *
 	 * @return string
 	 */
@@ -443,48 +443,53 @@ if ( ! function_exists( 'get_the_rpr_structured_data_header' ) ) {
 				$out       .= '"image": "' . $img_url[0] . '",'; //get_post_thumbnail( $recipe_id, 'medium' ) . '",';
 				$out       .= '"thumbnailUrl": "' . $thumb_url[0] . '",'; //get_post_thumbnail_url( $recipe_id, 'thumbnail' ) . '",';
 			}
-			// Description
+			// Description.
 			if ( isset( $recipe['rpr_recipe_description'][0] ) ) {
 				$description = strip_tags( $recipe['rpr_recipe_description'][0] );
 				$description = preg_replace( "/\s+/", " ", $description );
 				$out         .= '"description": "' . esc_html( $description ) . '",';
 			}
-			// Ingredients @TODO: This triggers a warning as '$recipe['rpr_recipe_ingredients'][0]' is serialized.
-			if ( isset( $recipe['rpr_recipe_ingredients'][0] ) && count( $recipe['rpr_recipe_ingredients'][0] ) > 0 ) {
-				$out         .= '"recipeIngredient": [';
-				$ingredients = unserialize( $recipe['rpr_recipe_ingredients'][0] );
 
-				foreach ( $ingredients as $ingredient ) {
-					if ( ! isset( $ingredient['grouptitle'] ) ) {
-						if ( isset( $ingredient['ingredient_id'] ) ) {
-							$term = get_term_by( 'id', $ingredient['ingredient_id'], 'rpr_ingredient' );
-						} else {
-							$term = get_term_by( 'name', $ingredient['ingredient'], 'rpr_ingredient' );
+			// Ingredients.
+			if ( isset( $recipe['rpr_recipe_ingredients'][0] ) ) {
+
+				$ingredients = maybe_unserialize( $recipe['rpr_recipe_ingredients'][0] );
+
+				if ( count( $ingredients ) > 0 ) {
+					$out .= '"recipeIngredient": [';
+					foreach ( $ingredients as $ingredient ) {
+						if ( ! isset( $ingredient['grouptitle'] ) ) {
+							$out .= '"';
+							$out .= isset( $ingredient['amount'] ) ? esc_html( $ingredient['amount'] ) : '';
+							$out .= ' '; // @TODO: Fix the need for this.
+							$out .= isset( $ingredient['unit'] ) ? esc_html( $ingredient['unit'] ) : '';
+							$out .= ' ';
+							$out .= isset( $ingredient['ingredient'] ) ? $ingredient['ingredient'] : '';
+							$out .= ', ';
+							$out .= isset( $ingredient['notes'] ) ? esc_html( $ingredient['notes'] ) : '';
+							$out .= '",';
 						}
+					}
+					$out = rtrim( $out, "," );
+					$out .= '], ';
+				}
+			}
 
-						$out .= '"' . esc_html( $ingredient['amount'] ) . ' ' . esc_html( $ingredient['unit'] ) . ' ' . $term->name;
-						if ( isset( $ingredient['notes'] ) && $ingredient['notes'] != '' ) {
-							$out .= ', ' . esc_html( $ingredient['notes'] );
+			if ( isset( $recipe['rpr_recipe_instructions'][0] ) ) {
+
+				$instructions = maybe_unserialize( $recipe['rpr_recipe_instructions'][0] );
+
+				if ( count( $instructions ) > 0 ) {
+					$out .= '"recipeInstructions": "';
+					foreach ( $instructions as $instruction ) {
+						if ( ! isset( $instruction['grouptitle'] ) ) {
+							$out .= $instruction['description'];
 						}
-						$out .= '",';
 					}
+					$out .= '",';
 				}
-				$out = rtrim( $out, "," );
-				$out .= '], ';
 			}
-			// Instructions @TODO: This triggers a warning as 'count( $recipe['rpr_recipe_instructions'][0]' is serialized.
-			if ( isset( $recipe['rpr_recipe_instructions'][0] ) && count( $recipe['rpr_recipe_instructions'][0] ) > 0 ) {
-				$instructions = unserialize( $recipe['rpr_recipe_instructions'][0] );
-
-				$out .= '"recipeInstructions": "';
-				foreach ( $instructions as $instruction ) {
-					if ( ! isset( $instruction['grouptitle'] ) ) {
-						$out .= $instruction['description'];
-					}
-				}
-				$out .= '",';
-			}
-			// Metadata like servings, nutrtion, ...
+			// Metadata like servings, nutrition.
 			if ( isset( $recipe['rpr_recipe_servings'][0] ) ) {
 				$out .= '"recipeYield": "' . esc_html( $recipe['rpr_recipe_servings'][0] ) . ' ' . esc_html( $recipe['rpr_recipe_servings_type'][0] ) . '",';
 			}
@@ -564,7 +569,7 @@ if ( ! function_exists( 'get_the_rpr_structured_data_header' ) ) {
 		}
 
 		/**
-		 * return the renderd output
+		 * return the rendered output
 		 */
 		return $out;
 	}
@@ -613,7 +618,7 @@ if ( ! function_exists( 'get_the_rpr_structured_data_footer' ) ) {
 		}
 
 		/**
-		 * return the renderd output
+		 * return the rendered output
 		 */
 		return $out;
 	}
@@ -641,34 +646,26 @@ if ( ! function_exists( 'get_the_rpr_recipe_description' ) ) {
 	 * @return string
 	 */
 	function get_the_rpr_recipe_description() {
-		/**
-		 *  Get the recipe id
-		 */
+
+		$data_format = AdminPageFramework::getOption( 'rpr_options', array(	'metadata',	'structured_data_format' ), 'microdata' );
+
+		 // Get the recipe id.
 		if ( isset( $GLOBALS['recipe_id'] ) && $GLOBALS['recipe_id'] != '' ) {
 			$recipe_id = $GLOBALS['recipe_id'];
 		} else {
 			$recipe_id = get_post()->ID;
 		}
 		$recipe = get_post_custom( $recipe_id );
-		/**
-		 *  Create an empty output string
-		 */
+
+		// Create an empty output string
 		$out = '';
 
-		/**
-		 * Render the description only if it is not empty
-		 */
-		if ( strlen( $recipe['rpr_recipe_description'][0] ) > 0 ) {
+		 // Render the description only if it is not empty
+		if ( isset( $recipe['rpr_recipe_description'] ) && strlen( $recipe['rpr_recipe_description'][0] ) > 0 ) {
 			$out .= '<div class="rpr_description" ';
-			if ( AdminPageFramework::getOption( 'rpr_options', array(
-					'metadata',
-					'structured_data_format',
-				), 'microdata' ) === 'microdata' ) {
+			if (  'microdata' === $data_format ) {
 				$out .= ' itemprop="description" >';
-			} elseif ( AdminPageFramework::getOption( 'rpr_options', array(
-					'metadata',
-					'structured_data_format',
-				), 'microdata' ) === 'rdfa' ) {
+			} elseif ( 'rdfa' === $data_format ) {
 				$out .= ' property="description" >';
 			} else {
 				$out .= '>';
@@ -677,6 +674,20 @@ if ( ! function_exists( 'get_the_rpr_recipe_description' ) ) {
 			//$out .= sanitize_post_field( 'rpr_recipe_description', $recipe['rpr_recipe_description'][0], $recipe_id );
 			//@TODO: This is known to cause an infinite loop with certain shortcode embeds.
 			$out .= apply_filters( 'the_content', $recipe['rpr_recipe_description'][0] );
+			$out .= '</div>';
+		} else {
+			$out .= '<div class="rpr_description" ';
+			if (  'microdata' === $data_format ) {
+				$out .= ' itemprop="description" >';
+			} elseif ( 'rdfa' === $data_format ) {
+				$out .= ' property="description" >';
+			} else {
+				$out .= '>';
+			}
+
+			//$out .= sanitize_post_field( 'rpr_recipe_description', $recipe['rpr_recipe_description'][0], $recipe_id );
+			//@TODO: This is known to cause an infinite loop with certain shortcode embeds.
+			$out .= apply_filters( 'the_content', get_the_content() );
 			$out .= '</div>';
 		}
 
