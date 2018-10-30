@@ -189,6 +189,9 @@ rprListingsSc = {
 		case 'rpr-recipe-index':
 		    out+= "rpr-recipe-index";
 		    break;
+		case 'rpr-recipe-grid':
+			out+= "rpr-recipe-grid";
+			break;
 	        default:
 		    alert(sel.val());
 		    alert('error');

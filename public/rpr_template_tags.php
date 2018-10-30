@@ -1489,9 +1489,9 @@ if ( ! function_exists( 'get_the_rpr_recipe_notes' ) ) {
 		 * Render the notes only if it is not empty
 		 */
 		if ( isset( $recipe['rpr_recipe_notes'][0] ) && strlen( $recipe['rpr_recipe_notes'][0] ) > 0 ) {
-			$out .= '<span class="rpr_notes" >';
+			$out .= '<div class="rpr_notes" >';
 			$out .= apply_filters( 'the_content', $recipe['rpr_recipe_notes'][0] );
-			$out .= '</span>';
+			$out .= '</div>';
 		}
 
 		/**

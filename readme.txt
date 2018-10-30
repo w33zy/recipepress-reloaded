@@ -110,6 +110,10 @@ Please help [translating](https://translate.wordpress.org/projects/wp-plugins/re
  * Improved recipe editor
 
 == Upgrade Notice ==
+
+= 0.10.0 =
+Please make a backup before updating to this new release.
+
 = 0.9.2 =
 0.9.2 Bugfix release: Fixing a bug while saving recipes the first time
 

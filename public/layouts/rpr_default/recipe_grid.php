@@ -19,8 +19,8 @@ if ( $grid_posts && count( $grid_posts ) > 0 ) {
 
 	foreach ( $grid_posts as $key => $posts ) {
 
-		$link = get_term_link( $key, $taxonomy );
-		$term = get_term_by( 'slug', $key, $taxonomy );
+		$link = get_term_link( $key, $options['taxonomy'] );
+		$term = get_term_by( 'slug', $key, $options['taxonomy'] );
 
 		if ( 0 === $i && ( count( $posts ) !== $i ) ) {
 			$out .= '<div class="rpr_tax_container ' . $key . '">';

@@ -478,15 +478,13 @@ class RPR_Public {
 	/**
 	 * Render a recipe index in a grid by recipe course.
 	 *
-	 * @since 0.9.4
+	 * @since 0.10.0
 	 *
-	 * @param string $taxonomy
-	 * @param int $recipe_count
-	 * @param string $orderby
+	 * @param array $options
 	 *
 	 * @return string $content
 	 */
-	private function render_recipe_grid( $taxonomy, $recipe_count, $orderby ) {
+	private function render_recipe_grid( $options ) {
 
 		$grid_posts = array();
 		$no_duplicates = array();
@@ -503,7 +501,7 @@ class RPR_Public {
 		$recipe_post = false;
 
 		$terms = get_terms( array(
-			'taxonomy' => $taxonomy,
+			'taxonomy' => $options['taxonomy'],
 		) );
 
 		if ( ! is_wp_error( $terms ) ) {
@@ -511,21 +509,21 @@ class RPR_Public {
 				$args  = array(
 					'post_type'      => 'rpr_recipe',
 					'post_status'    => 'publish',
-					'orderby'        => $orderby,
-					'order'          => 'DESC',
-					'posts_per_page' => $recipe_count,
-					'post__not_in'    => $no_duplicates,
+					'orderby'        => $options['orderby'],
+					'order'          => 'ASC',
+					'posts_per_page' => $options['count'],
+					'post__not_in'   => $no_duplicates,
 					'tax_query' => array(
 						array(
-							'taxonomy' => $taxonomy,
+							'taxonomy' => $options['taxonomy'],
 							'field'    => 'slug',
 							'terms'    => $term->slug,
 						),
 					),
 				);
 
-				// This doubles the query time so I am disabling by default.
-				if ( apply_filters( 'rpr_recipe_grid_no_duplicates', false ) ) {
+				// Removing duplicates doubles the query time so I am disabling by default.
+				if ( ! $options['duplicates'] ) {
 					foreach ( get_posts( $args ) as $_post ) {
 						$no_duplicates[] = $_post->ID;
 					}
@@ -689,7 +687,7 @@ class RPR_Public {
 	/**
 	 * Do the shortcode 'rpr-index-grid' and render a list of all recipes
 	 *
-	 * @since 0.8.0
+	 * @since 0.10.0
 	 *
 	 * @param mixed $options
 	 *
@@ -700,13 +698,14 @@ class RPR_Public {
 		 * Set default values for options not set explicitly
 		 */
 		$options = shortcode_atts( array(
-			'taxonomy'     => 'course',
-			'recipe_count' => 9,
-			'orderby'      => 'date',
+			'taxonomy'   => 'course',
+			'count'      => 8,
+			'orderby'    => 'date',
+			'duplicates' => true,
 		), $options );
 
 		// The actual rendering is done by a special function
-		$output = $this->render_recipe_grid( $options['taxonomy'], $options['recipe_count'], $options['orderby'] );
+		$output = $this->render_recipe_grid( $options );
 
 		return do_shortcode( $output );
 	}
