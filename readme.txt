@@ -72,6 +72,7 @@ Please help [translating](https://translate.wordpress.org/projects/wp-plugins/re
 
 = 0.10.0 =
   * Added a new picture grid based recipe index page via shortcode
+  * Switched recipe description metabox to use the WP editor from increased compatibility with 3rd plugins such as Yoast SEO
   * Cleaned up a couple files as per WPCS rules... this is an ongoing process
   * Fixed various PHP warning and errors
   * Removed the usage of non-breaking spaces, fixed extra spaces before commas in ingredient line

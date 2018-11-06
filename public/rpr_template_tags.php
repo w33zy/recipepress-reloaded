@@ -455,7 +455,7 @@ if ( ! function_exists( 'get_the_rpr_structured_data_header' ) ) {
 
 				$ingredients = maybe_unserialize( $recipe['rpr_recipe_ingredients'][0] );
 
-				if ( count( $ingredients ) > 0 ) {
+				if ( $ingredients && count( $ingredients ) > 0 ) {
 					$out .= '"recipeIngredient": [';
 					foreach ( $ingredients as $ingredient ) {
 						if ( ! isset( $ingredient['grouptitle'] ) ) {
@@ -475,11 +475,12 @@ if ( ! function_exists( 'get_the_rpr_structured_data_header' ) ) {
 				}
 			}
 
+			// Instructions.
 			if ( isset( $recipe['rpr_recipe_instructions'][0] ) ) {
 
 				$instructions = maybe_unserialize( $recipe['rpr_recipe_instructions'][0] );
 
-				if ( count( $instructions ) > 0 ) {
+				if ( $instructions && count( $instructions ) > 0 ) {
 					$out .= '"recipeInstructions": "';
 					foreach ( $instructions as $instruction ) {
 						if ( ! isset( $instruction['grouptitle'] ) ) {
@@ -1136,9 +1137,9 @@ if ( ! function_exists( 'get_the_rpr_recipe_instructions' ) ) {
 		/**
 		 *  Get the instructions:
 		 */
-		$instructions = unserialize( $recipe['rpr_recipe_instructions'][0] );
+		$instructions = maybe_unserialize( $recipe['rpr_recipe_instructions'][0] );
 
-		if ( count( $instructions ) > 0 ) {
+		if ( $instructions && count( $instructions ) > 0 ) {
 			/**
 			 * Add the structured data tag
 			 */
@@ -1573,13 +1574,13 @@ if ( ! function_exists( 'get_the_rpr_recipe_servings' ) ) {
 			/**
 			 * @todo: add option for icon class
 			 */
-			$out .= '<i class="fa fa-pie-chart"></i>&nbsp;';
+			$out .= '<i class="fa fa-pie-chart"></i> ';
 		} else {
-			$out .= __( 'For:', 'recipepress-reloaded' );
-			$out .= '&nbsp;';
+			$out .= __( 'For', 'recipepress-reloaded' );
+			$out .= ': ';
 		}
 
-		$out .= '<span class="rpr_servings" >' . esc_html( $recipe['rpr_recipe_servings'][0] ) . '</span>&nbsp;';
+		$out .= '<span class="rpr_servings" >' . esc_html( $recipe['rpr_recipe_servings'][0] ) . '</span> ';
 		$out .= '<span class="rpr_servings_type" >' . esc_html( $recipe['rpr_recipe_servings_type'][0] ) . '</span>';
 
 		$out .= '</div>';

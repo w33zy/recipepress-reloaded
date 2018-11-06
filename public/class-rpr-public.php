@@ -113,6 +113,10 @@ class RPR_Public {
 		 * class.
 		 */
 		wp_enqueue_script( 'recipepress-reloaded', plugin_dir_url( __FILE__ ) . 'js/rpr-public.js', array( 'jquery' ), $this->version, true );
+		wp_localize_script( 'recipepress-reloaded', 'rpr_script_vars', array(
+			'ajax_url'  => admin_url( 'admin-ajax.php' ),
+			'rpr_nonce' => wp_create_nonce( 'rpr-nonce' ),
+		) );
 	}
 
 	// Add Widgets.

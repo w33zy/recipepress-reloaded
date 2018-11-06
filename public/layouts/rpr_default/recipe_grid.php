@@ -50,7 +50,10 @@ if ( $grid_posts && count( $grid_posts ) > 0 ) {
 
 			$out .= '</div> <!-- .rpr_tax_items_wrapper -->';
 			$out .= '<a href="' . esc_url( $link ) . '">';
-			$out .= '<div class="rpr_tax_link_button">';
+			$out .= '<div class="rpr_tax_link_button" ';
+			$out .= 'data-term="' . esc_attr( $key ) . '" ';
+			$out .= 'data-taxonomy="' . esc_attr( $options['taxonomy'] ) . '"';
+			$out .= '>';
 			$out .= '<p>' . sprintf( __( 'View more %s recipes', 'recipepress-reloaded' ), $term->name ) . '</p>';
 			$out .= '</div>';
 			$out .= '</a>';
