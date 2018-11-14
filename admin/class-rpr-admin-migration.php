@@ -34,9 +34,9 @@ class RPR_Admin_Migration {
 
 	/**
 	 * The database version of the plugin files. Used to compare with the
-	 * version number saved in the database to decide if a database update is 
+	 * version number saved in the database to decide if a database update is
 	 * necessary
-	 * 
+	 *
 	 * @since   0.8.0
 	 * @access  private
 	 * @var     int   $dbversion  The database version of the plugin file.
@@ -57,7 +57,7 @@ class RPR_Admin_Migration {
 
 	/**
 	 * Fix the database version information
-	 * 
+	 *
 	 * @since 0.9.0
 	 */
 	public function fix_dbversion() {
@@ -76,12 +76,12 @@ class RPR_Admin_Migration {
 				return;
 			}
 		}
-		
+
 		/*
 		 * Check if site was affected by the 0.8.x multisite update bug
 		 */
 		if ( get_option( 'rpr_version_updated' ) && get_option( 'rpr_dbversion' ) ) {
-			// If db version 5 is set but rpr_option still is there, migration did not trigger on previous update 
+			// If db version 5 is set but rpr_option still is there, migration did not trigger on previous update
 			if( version_compare( get_option( 'rpr_dbversion' ), '5', '=' ) && get_option( 'rpr_option' ) ) {
 				// Reset the dbversion to 4 (as it hasn't been updated to 5)
 				update_option( 'rpr_dbversion', '4' );
@@ -115,12 +115,12 @@ class RPR_Admin_Migration {
 			// Remove old version string 'rpr_version_updated'
 			delete_option( 'rpr_version_updated' );
 	}
-		
+
 
 	/**
-	 * Check if the database needs an update by comparing the dbversion of 
+	 * Check if the database needs an update by comparing the dbversion of
 	 * plugin an database
-	 * 
+	 *
 	 * @since 0.8.0
 	 */
 	public function check_migration() {
@@ -130,9 +130,7 @@ class RPR_Admin_Migration {
 		}
 
 		if ( get_option( 'rpr_dbversion' ) && get_option( 'rpr_dbversion' ) < $this->dbversion ) {
-			/**
-			 * Set Option to enable the update procedures
-			 */
+			// Set Option to enable the update procedures
 			update_option( 'rpr_update_needed', 1 );
 		}
 	}
@@ -149,7 +147,7 @@ class RPR_Admin_Migration {
 			if ( get_option( 'rpr_dbversion' ) < 4 ) {
 				printf( __( '%1s You are upgrading from an old version of RecipePress reloaded. A migration procedure is provided but it is not guaranteed it will work. Please make sure you have a backup you can roll back to.<br/> In case of problems file a bug report at the <a href="%2s" target="_blank">support forum</a> or file an issue at <a href="%3s" target="_blank">github</a>.<br/>', 'recipepress-reloaded' ), '<i class="fa fa-exclamation-triangle fa-3x" style="float:left; margin-right:6px; color:red;"></i>', 'https://wordpress.org/support/plugin/recipepress-reloaded', 'https://github.com/dasmaeh/recipepress-reloaded/issues' );
 			}
-			printf( __( 'The Recipe Press Reloaded database needs to upgraded. Make sure you have a backup before you proceed. | <a href="%1$s">Proceed</a>', 'recipepress-reloaded' ), '?post_type=rpr_recipe&rpr_do_migration=1' );
+			printf( __( 'The RecipePress Reloaded database needs to upgraded. Make sure you have a backup before you proceed. | <a href="%1$s">Proceed</a>', 'recipepress-reloaded' ), '?post_type=rpr_recipe&rpr_do_migration=1' );
 			echo "</p></div>";
 		}
 	}
@@ -260,7 +258,7 @@ class RPR_Admin_Migration {
 				$new_options['tax_custom'][] = $taxarray;
 			}
 		}
-		
+
 		// Get a list of all units used for ingredients
 		$units	 = array();
 		global $wpdb;

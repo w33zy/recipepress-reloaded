@@ -83,9 +83,9 @@ class RPR {
 
 		$this->load_dependencies();
 		$this->set_locale();
+		$this->background_processor();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -144,6 +144,9 @@ class RPR {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'libraries/apf/admin-page-framework.php';
 
+		// Background processing.
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'libraries/wp-background-processing/wp-background-processing.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-rpr-background-processes.php';
 
 		$this->loader = new RPR_Loader();
 
@@ -166,6 +169,21 @@ class RPR {
 	}
 
 	/**
+	 * Load the actions related to the background processing library.
+	 *
+	 * @since    0.10.0
+	 * @access   private
+	 */
+	private function background_processor() {
+
+		$background_processes = new RPR_Background_Processes();
+
+		$this->loader->add_action( 'plugins_loaded', $background_processes, 'init' );
+		$this->loader->add_action( 'admin_notices', $background_processes, 'admin_notices' );
+		$this->loader->add_action( 'init', $background_processes, 'process_handler' );
+	}
+
+	/**
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
@@ -175,7 +193,6 @@ class RPR {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new RPR_Admin( $this->get_version(), $this->dbversion );
-
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 

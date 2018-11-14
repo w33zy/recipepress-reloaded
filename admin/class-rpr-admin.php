@@ -240,7 +240,7 @@ class RPR_Admin {
 		if ( $recipe !== null && $recipe->post_type == 'rpr_recipe' ) {
 			$errors = false;
 			// verify if this is an auto save routine.
-			// If it is our form has not been submitted, so we dont want to do anything
+			// If it is our form has not been submitted, so we don't want to do anything
 			if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 				$errors = "There was an error doing autosave";
 			}
