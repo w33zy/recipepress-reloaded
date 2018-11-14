@@ -269,7 +269,7 @@ if ( ! function_exists( 'get_the_rpr_taxonomy_list' ) ) {
 	 */
 	function get_the_rpr_taxonomy_list( $icons = false, $label = false, $sep = '&nbsp;/&nsbp;', $tags = false ) {
 		/*
-		 *  Define the output string 
+		 *  Define the output string
 		 */
 		$out = "";
 
@@ -494,11 +494,15 @@ if ( ! function_exists( 'get_the_rpr_structured_data_header' ) ) {
 			if ( isset( $recipe['rpr_recipe_servings'][0] ) ) {
 				$out .= '"recipeYield": "' . esc_html( $recipe['rpr_recipe_servings'][0] ) . ' ' . esc_html( $recipe['rpr_recipe_servings_type'][0] ) . '",';
 			}
-			if ( AdminPageFramework::getOption( 'rpr_options', array(
-					'metadata',
-					'use_nutritional_data',
-				), false ) == true &&
-			     ( $recipe['rpr_recipe_calorific_value'][0] + $recipe['rpr_recipe_fat'][0] + $recipe['rpr_recipe_protein'][0] + $recipe['rpr_recipe_carbohydrate'][0] ) >= 0 ) {
+
+			$use_nutritional_data = AdminPageFramework::getOption( 'rpr_options', array( 'metadata', 'use_nutritional_data' ), false );
+			$rpr_recipe_calorific_value = isset( $recipe['rpr_recipe_calorific_value'] ) ? (int) $recipe['rpr_recipe_calorific_value'][0] : 0;
+			$rpr_recipe_fat = isset( $recipe['rpr_recipe_fat'] ) ? (int) $recipe['rpr_recipe_fat'][0] : 0;
+			$rpr_recipe_protein = isset( $recipe['rpr_recipe_protein'] ) ? (int) $recipe['rpr_recipe_protein'][0] : 0;
+			$rpr_recipe_carbohydrate = isset( $recipe['rpr_recipe_carbohydrate'] ) ? (int) $recipe['rpr_recipe_carbohydrate'][0] : 0;
+
+			if ( true == $use_nutritional_data &&
+			     ( $rpr_recipe_calorific_value + $rpr_recipe_fat + $rpr_recipe_protein + $rpr_recipe_carbohydrate ) >= 0 ) {
 				$out .= '"nutrition": {';
 				$out .= '"@type": "NutritionInformation",';
 
@@ -1687,15 +1691,18 @@ if ( ! function_exists( 'get_the_rpr_recipe_nutrition' ) ) {
 		}
 		$recipe = get_post_custom( $recipe_id );
 
+		$use_nutritional_data = AdminPageFramework::getOption( 'rpr_options', array( 'metadata', 'use_nutritional_data'	), false );
+		$rpr_recipe_calorific_value = isset( $recipe['rpr_recipe_calorific_value'] ) ? (int) $recipe['rpr_recipe_calorific_value'][0] : 0;
+		$rpr_recipe_fat = isset( $recipe['rpr_recipe_fat'] ) ? (int) $recipe['rpr_recipe_fat'][0] : 0;
+		$rpr_recipe_protein = isset( $recipe['rpr_recipe_protein'] ) ? (int) $recipe['rpr_recipe_protein'][0] : 0;
+		$rpr_recipe_carbohydrate = isset( $recipe['rpr_recipe_carbohydrate'] ) ? (int) $recipe['rpr_recipe_carbohydrate'][0] : 0;
+
 		/**
 		 * Return if no nutritional data are saved or nutritional data is not
 		 * enabled
 		 */
-		if ( AdminPageFramework::getOption( 'rpr_options', array(
-				'metadata',
-				'use_nutritional_data',
-			), false ) === false ||
-		     ( $recipe['rpr_recipe_calorific_value'][0] + $recipe['rpr_recipe_fat'][0] + $recipe['rpr_recipe_protein'][0] + $recipe['rpr_recipe_carbohydrate'][0] ) <= 0 ) {
+		if ( false === $use_nutritional_data ||
+		     ( $rpr_recipe_calorific_value + $rpr_recipe_fat + $rpr_recipe_protein + $rpr_recipe_carbohydrate ) <= 0 ) {
 			return;
 		}
 
