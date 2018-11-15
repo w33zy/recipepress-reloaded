@@ -20,9 +20,10 @@ class RPR_Deslash_Content extends WP_Background_Process {
 	public function get_all_recipes() {
 
 		$this->all_recipes = get_posts(array(
-			'fields'          => 'ids', // Only get post IDs
-			'posts_per_page'  => 5,
-			'post_type' => 'rpr_recipe',
+			'fields'         => 'ids', // Only get post IDs.
+			'posts_per_page' => -1, // Get all posts.
+			'post_type'      => 'rpr_recipe',
+			'post_status'    => 'any'
 		));
 
 		return $this->all_recipes;
@@ -81,10 +82,6 @@ class RPR_Deslash_Content extends WP_Background_Process {
 	 */
 	protected function complete() {
 		parent::complete();
-
 		update_option( 'rpr_content_cleaned', 2, false );
 	}
-
-
-
 }

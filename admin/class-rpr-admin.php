@@ -224,19 +224,14 @@ class RPR_Admin {
 	 * @param mixed $recipe The $recipe post object
 	 *
 	 * @since 0.8.0
+	 *
+	 * @return void|int
 	 */
 	public function save_recipe( $recipe_id, $recipe = null ) {
 		remove_action( 'save_post', array( $this, 'save_recipe' ) );
 
 		$data = $_POST;
 
-		/**
-		 *  This is done for testing! REMOVE WHEN DONE!
-		 */
-		//var_dump( $_POST);
-		//die;
-		//var_dump( $recipe );
-		//die;
 		if ( $recipe !== null && $recipe->post_type == 'rpr_recipe' ) {
 			$errors = false;
 			// verify if this is an auto save routine.
@@ -264,14 +259,7 @@ class RPR_Admin {
 
 			//if(!isset($data)||$data==""){$data=$_POST;}
 			if ( $recipe !== null && $recipe->post_type == 'rpr_recipe' ) {
-				/**
-				 * This is for testing! REMOVE WHEN DONE!
-				 * echo "<pre>";
-				 * foreach( $data as $key => $value){
-				 * echo $key . "</br>";
-				 * }
-				 * //die;
-				 */
+
 				$this->generalmeta->save_generalmeta( $recipe_id, $data, $recipe );
 
 				if ( isset( $data['rpr_recipe_ingredients'] ) ) {
@@ -290,7 +278,7 @@ class RPR_Admin {
 				if ( AdminPageFramework::getOption( 'rpr_options', array( 'metadata', 'use_source' ), false ) ) {
 					$this->source->save_sourcemeta( $recipe_id, $data, $recipe );
 				}
-				//die;
+
 				add_action( 'save_post', array( $this, 'save_recipe' ) );
 			}
 		}
@@ -302,14 +290,14 @@ class RPR_Admin {
 	 */
 	// Display any errors
 	public function admin_notice_handler() {
-
+		$screen = get_current_screen();
 		$errors = get_option( 'rpr_admin_errors' );
 
-		if ( $errors ) {
+		if ( 'rpr_recipe' === $screen->id && $errors ) {
 			echo '<div class="error"><p>' . $errors . '</p></div>';
 		}
 
-		// Reset the error option for the next error
+		// Reset the error option for the next error.
 		update_option( 'rpr_admin_errors', false );
 	}
 
@@ -319,6 +307,8 @@ class RPR_Admin {
 	 * @since 0.8.3
 	 *
 	 * @param array $query_args
+	 *
+	 * @return array
 	 */
 	public function add_to_dashboard_recent_posts_widget( $query_args ) {
 		$query_args = array_merge( $query_args, array( 'post_type' => array( 'post', 'rpr_recipe' ) ) );
@@ -332,6 +322,8 @@ class RPR_Admin {
 	 * @since 0.8.3
 	 *
 	 * @param array $items
+	 *
+	 * @return array
 	 */
 	public function add_recipes_glance_items( $items = array() ) {
 		$num_recipes = wp_count_posts( 'rpr_recipe' );
