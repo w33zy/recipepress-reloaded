@@ -39,9 +39,9 @@ const RPR_DBVER = '';
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-rpr-activator.php
- * 
+ *
  * @since 0.8.0
- * @todo move this completely to admin_init as activation_hook does not catch 
+ * @todo move this completely to admin_init as activation_hook does not catch
  * on multisite installations
  */
 function activate_rpr() {
@@ -51,7 +51,7 @@ function activate_rpr() {
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-rpr-deactivator.php
- * 
+ *
  * @since 0.8.0
  */
 function deactivate_rpr() {
@@ -62,7 +62,7 @@ function deactivate_rpr() {
 /**
  * The code that runs during plugin deinstallation.
  * This action is documented in includes/class-rpr-uninstaller.php
- * 
+ *
  * @since 0.8.0
  */
 function uninstall_rpr() {
@@ -97,7 +97,6 @@ function run_rpr() {
 
 	$plugin = new RPR();
 	$plugin->run();
-
 }
 
 run_rpr();

@@ -43,10 +43,10 @@ class RPR_Deslash_Content extends WP_Background_Process {
 		$msg = '';
 
 		if ( ! get_option( 'rpr_content_cleaned' ) && count( $this->get_all_recipes() ) >= 1 ) {
-			$msg .= '<div class="notice notice-warning is-dismissible">';
+			$msg .= '<div class="rpr notice notice-warning is-dismissible">';
 			$msg .= '<p>';
-			$msg .= __( 'The RecipePress Reloaded database needs to upgraded. Make sure you have a backup before you proceed.', 'recipepress-reloaded' );
-			$msg .= ' | <a href="' . wp_nonce_url( admin_url( '?deslash_content=all' ), 'deslash_content' ) . '">' . __( 'Update', 'recipepress-reloaded' ) . '</a>';
+			$msg .= __( 'The RecipePress Reloaded database needs to be updated. Make sure you have a backup before you proceed.', 'recipepress-reloaded' );
+			$msg .= '<a href="' . wp_nonce_url( admin_url( '?deslash_content=all' ), 'deslash_content' ) . '">' . __( 'Update', 'recipepress-reloaded' ) . '</a>';
 			$msg .= '</p>';
 			$msg .= '</div>';
 		}

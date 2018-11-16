@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RecipePress reloaded\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-31 10:57-0500\n"
+"POT-Creation-Date: 2018-11-16 10:14-0500\n"
 "PO-Revision-Date: 2016-12-31 10:57+0100\n"
 "Last-Translator: Jan Köster <jan.koester@cbjck.de>\n"
 "Language-Team: dasmaeh@cbjck.de\n"
@@ -67,12 +67,12 @@ msgid "cuisine"
 msgstr ""
 
 #: ../admin/class-rpr-admin-demo.php:147 ../admin/class-rpr-admin-demo.php:148
-#: ../admin/class-rpr-admin-migration.php:430
+#: ../admin/class-rpr-admin-migration.php:428
 msgid "Season"
 msgstr ""
 
 #: ../admin/class-rpr-admin-demo.php:149
-#: ../admin/class-rpr-admin-migration.php:430
+#: ../admin/class-rpr-admin-migration.php:428
 msgid "Seasons"
 msgstr ""
 
@@ -81,12 +81,12 @@ msgid "season"
 msgstr ""
 
 #: ../admin/class-rpr-admin-demo.php:156 ../admin/class-rpr-admin-demo.php:157
-#: ../admin/class-rpr-admin-migration.php:431
+#: ../admin/class-rpr-admin-migration.php:429
 msgid "Difficulty"
 msgstr ""
 
 #: ../admin/class-rpr-admin-demo.php:158
-#: ../admin/class-rpr-admin-migration.php:431
+#: ../admin/class-rpr-admin-migration.php:429
 msgid "Difficulties"
 msgstr ""
 
@@ -168,26 +168,26 @@ msgid "Description"
 msgstr ""
 
 #: ../admin/class-rpr-admin-generalmeta.php:112
-#: ../public/rpr_template_tags.php:1429
+#: ../public/rpr_template_tags.php:1433
 msgid "Notes"
 msgstr ""
 
 #: ../admin/class-rpr-admin-ingredients.php:54
-#: ../admin/class-rpr-admin-migration.php:672
-#: ../admin/class-rpr-admin-migration.php:676
+#: ../admin/class-rpr-admin-migration.php:670
+#: ../admin/class-rpr-admin-migration.php:674
 #: ../admin/views/rpr-options-page/rpr-options-page-taxonomies/class-rpr-options-page-taxonomies-builtin.php:56
 #: ../admin/views/rpr-options-page/rpr-options-page-taxonomies/class-rpr-options-page-taxonomies-builtin.php:105
 #: ../public/class-rpr-recipeposttype.php:125
-#: ../public/rpr_template_tags.php:750
+#: ../public/rpr_template_tags.php:754
 msgid "Ingredients"
 msgstr ""
 
 #: ../admin/class-rpr-admin-instructions.php:51
-#: ../public/rpr_template_tags.php:1086
+#: ../public/rpr_template_tags.php:1090
 msgid "Instructions"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:150
+#: ../admin/class-rpr-admin-migration.php:148
 #, php-format
 msgid ""
 "%1s You are upgrading from an old version of RecipePress reloaded. A "
@@ -198,140 +198,141 @@ msgid ""
 "<br/>"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:152
+#: ../admin/class-rpr-admin-migration.php:150
 #, php-format
 msgid ""
-"The Recipe Press Reloaded database needs to upgraded. Make sure you have a "
+"The RecipePress Reloaded database needs to upgraded. Make sure you have a "
 "backup before you proceed. | <a href=\"%1$s\">Proceed</a>"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:444
+#: ../admin/class-rpr-admin-migration.php:442
 #: ../admin/views/rpr-modal-recipe.php:28
 msgid "Search"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:445
+#: ../admin/class-rpr-admin-migration.php:443
 msgid "Popular"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:446
+#: ../admin/class-rpr-admin-migration.php:444
 msgid "All"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:447
+#: ../admin/class-rpr-admin-migration.php:445
 #: ../public/class-rpr-recipeposttype.php:79
 msgid "Edit"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:448
+#: ../admin/class-rpr-admin-migration.php:446
+#: ../includes/background-processes/rpr-deslash-content.php:49
 msgid "Update"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:449
+#: ../admin/class-rpr-admin-migration.php:447
 msgid "Add New"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:450
+#: ../admin/class-rpr-admin-migration.php:448
 msgid "New"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:450
+#: ../admin/class-rpr-admin-migration.php:448
 #: ../widgets/class-rpr-widget-taxonomy-list.php:203
 msgid "Name"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:451
+#: ../admin/class-rpr-admin-migration.php:449
 msgid "Separate"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:451
+#: ../admin/class-rpr-admin-migration.php:449
 msgid "with commas"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:452
+#: ../admin/class-rpr-admin-migration.php:450
 msgid "Add or remove"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:453
+#: ../admin/class-rpr-admin-migration.php:451
 msgid "Choose from the most used"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:454
+#: ../admin/class-rpr-admin-migration.php:452
 #: ../libraries/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:120
 msgid "No"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:454
+#: ../admin/class-rpr-admin-migration.php:452
 msgid "found."
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:650
+#: ../admin/class-rpr-admin-migration.php:648
 msgid "recipes"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:694
-#: ../admin/class-rpr-admin-migration.php:703
+#: ../admin/class-rpr-admin-migration.php:692
+#: ../admin/class-rpr-admin-migration.php:701
 msgid "size"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:695
-#: ../admin/class-rpr-admin-migration.php:704
+#: ../admin/class-rpr-admin-migration.php:693
+#: ../admin/class-rpr-admin-migration.php:702
 msgid "sizes"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:921
+#: ../admin/class-rpr-admin-migration.php:919
 #, php-format
 msgid "Search %s"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:922
+#: ../admin/class-rpr-admin-migration.php:920
 #, php-format
 msgid "Popular %s"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:923
+#: ../admin/class-rpr-admin-migration.php:921
 #, php-format
 msgid "All %s"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:924
+#: ../admin/class-rpr-admin-migration.php:922
 #, php-format
 msgid "Edit %s"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:925
+#: ../admin/class-rpr-admin-migration.php:923
 #, php-format
 msgid "Update %s"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:926
+#: ../admin/class-rpr-admin-migration.php:924
 #: ../public/class-rpr-recipeposttype.php:127
 #: ../public/class-rpr-recipeposttype.php:181
 #, php-format
 msgid "Add New %s"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:927
+#: ../admin/class-rpr-admin-migration.php:925
 #, php-format
 msgid "New %s Name"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:928
+#: ../admin/class-rpr-admin-migration.php:926
 #, php-format
 msgid "Separate %s with commas"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:929
+#: ../admin/class-rpr-admin-migration.php:927
 #, php-format
 msgid "Add or remove %s"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:930
+#: ../admin/class-rpr-admin-migration.php:928
 #, php-format
 msgid "Choose from the most used %s"
 msgstr ""
 
-#: ../admin/class-rpr-admin-migration.php:931
+#: ../admin/class-rpr-admin-migration.php:929
 #, php-format
 msgid "No %s found."
 msgstr ""
@@ -361,7 +362,7 @@ msgstr ""
 
 #: ../admin/class-rpr-admin-source.php:51
 #: ../admin/views/rpr-metabox-source.php:24
-#: ../public/rpr_template_tags.php:2233
+#: ../public/rpr_template_tags.php:2240
 msgid "Source"
 msgstr ""
 
@@ -373,53 +374,53 @@ msgstr ""
 msgid "Insert image"
 msgstr ""
 
-#: ../admin/class-rpr-admin.php:371 ../admin/class-rpr-admin.php:374
+#: ../admin/class-rpr-admin.php:363 ../admin/class-rpr-admin.php:366
 msgid "Recipe updated."
 msgstr ""
 
-#: ../admin/class-rpr-admin.php:372
+#: ../admin/class-rpr-admin.php:364
 msgid "Custom field updated."
 msgstr ""
 
-#: ../admin/class-rpr-admin.php:373
+#: ../admin/class-rpr-admin.php:365
 msgid "Custom field deleted."
 msgstr ""
 
-#: ../admin/class-rpr-admin.php:376
+#: ../admin/class-rpr-admin.php:368
 #, php-format
 msgid "Recipe restored to revision from %s"
 msgstr ""
 
-#: ../admin/class-rpr-admin.php:377
+#: ../admin/class-rpr-admin.php:369
 msgid "Recipe published."
 msgstr ""
 
-#: ../admin/class-rpr-admin.php:378
+#: ../admin/class-rpr-admin.php:370
 msgid "Recipe saved."
 msgstr ""
 
-#: ../admin/class-rpr-admin.php:379
+#: ../admin/class-rpr-admin.php:371
 msgid "Recipe submitted."
 msgstr ""
 
-#: ../admin/class-rpr-admin.php:381
+#: ../admin/class-rpr-admin.php:373
 #, php-format
 msgid "Recipe scheduled for: <strong>%1$s</strong>."
 msgstr ""
 
-#: ../admin/class-rpr-admin.php:383
+#: ../admin/class-rpr-admin.php:375
 msgid "M j, Y @ G:i"
 msgstr ""
 
-#: ../admin/class-rpr-admin.php:385
+#: ../admin/class-rpr-admin.php:377
 msgid "Recipe draft updated."
 msgstr ""
 
-#: ../admin/class-rpr-admin.php:391 ../public/class-rpr-recipeposttype.php:83
+#: ../admin/class-rpr-admin.php:383 ../public/class-rpr-recipeposttype.php:83
 msgid "View recipe"
 msgstr ""
 
-#: ../admin/class-rpr-admin.php:397
+#: ../admin/class-rpr-admin.php:389
 msgid "Preview recipe"
 msgstr ""
 
@@ -1149,7 +1150,7 @@ msgstr ""
 #: ../admin/views/rpr-options-page/rpr-options-page-taxonomies/class-rpr-options-page-taxonomies-custom.php:186
 #: ../public/class-rpr-ingredientmeta.php:40
 #: ../public/class-rpr-recipeposttype.php:172
-#: ../public/rpr_template_tags.php:994
+#: ../public/rpr_template_tags.php:998
 msgid "s"
 msgstr ""
 
@@ -1258,6 +1259,12 @@ msgstr ""
 msgid ""
 "Unit list for serving sizes.<br/> I recommend using a well defined list of "
 "units as this will make your recipes more consistent and readable."
+msgstr ""
+
+#: ../includes/background-processes/rpr-deslash-content.php:48
+msgid ""
+"The RecipePress Reloaded database needs to be updated. Make sure you have a "
+"backup before you proceed."
 msgstr ""
 
 #: ../libraries/apf/admin-page-framework.php:46
@@ -1781,6 +1788,11 @@ msgstr ""
 msgid "Session Use Only Cookies"
 msgstr ""
 
+#: ../libraries/wp-background-processing/classes/wp-background-process.php:425
+#, php-format
+msgid "Every %d Minutes"
+msgstr ""
+
 #: ../public/class-rpr-ingredientmeta.php:40
 #, php-format
 msgid ""
@@ -1904,12 +1916,12 @@ msgid ""
 "prointed. Separate multiple entries with commas (',')."
 msgstr ""
 
-#: ../public/layouts/rpr_default/recipe_grid.php:54
+#: ../public/layouts/rpr_default/recipe_grid.php:57
 #, php-format
 msgid "View more %s recipes"
 msgstr ""
 
-#: ../public/layouts/rpr_default/recipe_grid.php:64
+#: ../public/layouts/rpr_default/recipe_grid.php:67
 #, php-format
 msgid "There are no recipes in the \"%s\" taxonomy to display."
 msgstr ""
@@ -1930,75 +1942,75 @@ msgstr ""
 msgid "<b>Error:</b> No taxonomy set for this list!"
 msgstr ""
 
-#: ../public/rpr_template_tags.php:855
+#: ../public/rpr_template_tags.php:859
 msgid "No ingredients could be found for this recipe."
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1013
+#: ../public/rpr_template_tags.php:1017
 msgid " ("
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1014
+#: ../public/rpr_template_tags.php:1018
 msgid ")"
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1017
+#: ../public/rpr_template_tags.php:1021
 msgid ", "
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1207
+#: ../public/rpr_template_tags.php:1211
 msgid "No instructions could be found for this recipe."
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1579
+#: ../public/rpr_template_tags.php:1583
 msgid "For"
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1638 ../public/rpr_template_tags.php:1641
+#: ../public/rpr_template_tags.php:1642 ../public/rpr_template_tags.php:1645
 msgid "Nutritional data"
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1763 ../public/rpr_template_tags.php:1772
+#: ../public/rpr_template_tags.php:1770 ../public/rpr_template_tags.php:1779
 msgid "Per 100g"
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1766
+#: ../public/rpr_template_tags.php:1773
 msgid "Per portion"
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1769
+#: ../public/rpr_template_tags.php:1776
 msgid "Per recipe"
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1785
+#: ../public/rpr_template_tags.php:1792
 msgid "Energy:"
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1788
+#: ../public/rpr_template_tags.php:1795
 msgid "Fat:"
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1791
+#: ../public/rpr_template_tags.php:1798
 msgid "Protein:"
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1794
+#: ../public/rpr_template_tags.php:1801
 msgid "Carbohydrate:"
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1849 ../public/rpr_template_tags.php:1852
+#: ../public/rpr_template_tags.php:1856 ../public/rpr_template_tags.php:1859
 msgid "Time"
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1951 ../public/rpr_template_tags.php:1953
+#: ../public/rpr_template_tags.php:1958 ../public/rpr_template_tags.php:1960
 msgid "Preparation: "
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1961 ../public/rpr_template_tags.php:1963
+#: ../public/rpr_template_tags.php:1968 ../public/rpr_template_tags.php:1970
 msgid "Cooking: "
 msgstr ""
 
-#: ../public/rpr_template_tags.php:1970 ../public/rpr_template_tags.php:1972
+#: ../public/rpr_template_tags.php:1977 ../public/rpr_template_tags.php:1979
 msgid "Ready in: "
 msgstr ""
 

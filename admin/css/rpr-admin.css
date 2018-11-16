@@ -34,10 +34,10 @@
 }
 
 .rpr-metabox-table th.rpr-ing-sort,
-.rpr-ing-sort, 
+.rpr-ing-sort,
 .rpr-ing-sort div,
 .rpr-metabox-table th.rpr-ins-sort,
-.rpr-ins-sort, 
+.rpr-ins-sort,
 .rpr-ins-sort div{
     width:32px;
     text-align:center!important;
@@ -169,7 +169,7 @@ tfoot .rpr-ins-add-row span{
 }
 .recipe-general-form-notes{
     clear:both;
-    margin-top: 1px; 
+    margin-top: 1px;
 }
 /*.detailsbox .recipe_details_row{
     float:left;
@@ -272,7 +272,7 @@ a.nav-tab{
 }
 .admin_demo{
     border:solid 1px #aaa;
-    background:#eee; 
+    background:#eee;
     padding:2px;
     margin: 0 2px;
     border-radius:3px;
@@ -309,4 +309,14 @@ a.nav-tab{
 #dashboard_right_now span.rpr_recipe-count:before {
     content: url('../../img/icon_16_gray.png');
     margin: -2px 0px 0px 0px;
+}
+
+.rpr.notice p > a {
+	color: white;
+	text-decoration: none;
+	background: #ffb900;
+	padding: 3px 8px;
+	border-radius: 3px;
+	border: 1px solid #d49b06;
+	margin: 0 0 0 1em;
 }
