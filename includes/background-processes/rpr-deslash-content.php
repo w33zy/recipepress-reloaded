@@ -42,7 +42,7 @@ class RPR_Deslash_Content extends WP_Background_Process {
 	public function admin_message() {
 		$msg = '';
 
-		if ( ! get_option( 'rpr_content_cleaned' ) ) {
+		if ( ! get_option( 'rpr_content_cleaned' ) && count( $this->get_all_recipes() ) >= 1 ) {
 			$msg .= '<div class="notice notice-warning is-dismissible">';
 			$msg .= '<p>';
 			$msg .= __( 'The RecipePress Reloaded database needs to upgraded. Make sure you have a backup before you proceed.', 'recipepress-reloaded' );
